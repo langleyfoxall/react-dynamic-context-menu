@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import ClickOutside from './ClickOutside'
+import ClickOutside from '@langleyfoxall/react-click-outside'
 import './style.css';
 import PropTypes from 'prop-types';
 
