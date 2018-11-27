@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import ClickOutside from '@langleyfoxall/react-click-outside';
 import './style.css';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 export default class DynamicContextMenu extends Component {
   constructor(props) {
     super(props);
@@ -63,15 +64,12 @@ export default class DynamicContextMenu extends Component {
     });
   }
 
-  render() {
+  renderDropdown() {
     const {
-      children,
       menuItems,
       ignoreClickEvents
     } = this.props;
-    return React.createElement(Fragment, null, React.cloneElement(children, {
-      onContextMenu: this.handleContextMenu
-    }), this.state.showing && React.createElement(ClickOutside, {
+    return React.createElement(ClickOutside, {
       domRef: this.ref,
       ignoreRefs: ignoreClickEvents,
       onClickOutside: this.handleClickOutside
@@ -84,7 +82,17 @@ export default class DynamicContextMenu extends Component {
         onClick: this.handleClick.bind(this, item),
         className: `item-hoverable ${item.className || 0}`
       }, item.label);
-    })))));
+    }))));
+  }
+
+  render() {
+    const {
+      children,
+      ignoreClickEvents
+    } = this.props;
+    return React.createElement(Fragment, null, React.cloneElement(children, {
+      onContextMenu: this.handleContextMenu
+    }), this.state.showing && ReactDOM.createPortal(this.renderDropdown(), document.body));
   }
 
 }

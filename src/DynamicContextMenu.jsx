@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import ClickOutside from '@langleyfoxall/react-click-outside'
 import './style.css';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 
 export default class DynamicContextMenu extends Component {
 
@@ -57,29 +58,33 @@ export default class DynamicContextMenu extends Component {
         });
     }
 
+    renderDropdown() {
+        const { menuItems, ignoreClickEvents} = this.props;
+
+        return (
+            <ClickOutside domRef={this.ref} ignoreRefs={ignoreClickEvents}
+                          onClickOutside={this.handleClickOutside}>
+                <div className="react-context-menu" style={this.state.style}>
+                    <ul>
+                        {menuItems.map((item, i) => {
+                            return <li key={i} onClick={this.handleClick.bind(this, item)}
+                                       className={`item-hoverable ${item.className || 0}`}>{item.label}</li>
+                        })}
+                    </ul>
+                </div>
+            </ClickOutside>
+        );
+    }
+
     render() {
-        const {children, menuItems, ignoreClickEvents} = this.props;
+        const {children, ignoreClickEvents} = this.props;
 
         return (
             <Fragment>
                 {React.cloneElement(children, {onContextMenu: this.handleContextMenu})}
-
-                {this.state.showing && (
-                    <ClickOutside domRef={this.ref} ignoreRefs={ignoreClickEvents}
-                                  onClickOutside={this.handleClickOutside}>
-                        <div className="react-context-menu" style={this.state.style}>
-                            <ul>
-                                {menuItems.map((item, i) => {
-                                    return <li key={i} onClick={this.handleClick.bind(this, item)}
-                                               className={`item-hoverable ${item.className || 0}`}>{item.label}</li>
-                                })}
-                            </ul>
-                        </div>
-                    </ClickOutside>
-                )}
+                {this.state.showing && ReactDOM.createPortal(this.renderDropdown(), document.body)}
             </Fragment>
-    )
-        ;
+        )
     }
 }
 

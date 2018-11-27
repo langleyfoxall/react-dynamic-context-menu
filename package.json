@@ -37,6 +37,7 @@
     "prop-types": "^15.6.2"
   },
   "dependencies": {
-    "@langleyfoxall/react-click-outside": "^1.0.0"
+    "@langleyfoxall/react-click-outside": "^1.0.0",
+    "react-dom": "^16.6.3"
   }
 }
