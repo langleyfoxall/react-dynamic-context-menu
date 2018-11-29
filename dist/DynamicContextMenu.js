@@ -15,7 +15,7 @@ export default class DynamicContextMenu extends Component {
     this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
-  handleClick(item, contextMenu, event) {
+  handleClick(item, event) {
     const {
       data
     } = this.props;
@@ -23,6 +23,7 @@ export default class DynamicContextMenu extends Component {
       showing: false
     });
     item.onClick(data, event);
+    event.stopPropagation();
   }
 
   handleClickOutside() {
