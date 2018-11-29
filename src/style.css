@@ -31,4 +31,5 @@
 .react-context-menu > ul li p,
 .react-context-menu > ul li a {
     font-size: inherit;
+    cursor: inherit;
 }

@@ -1,8 +1,9 @@
 import React, {Component, Fragment} from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+
 import ClickOutside from '@langleyfoxall/react-click-outside'
 import './style.css';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 
 export default class DynamicContextMenu extends Component {
 
@@ -59,7 +60,7 @@ export default class DynamicContextMenu extends Component {
     }
 
     renderDropdown() {
-        const { menuItems, ignoreClickEvents} = this.props;
+        const {menuItems, ignoreClickEvents} = this.props;
 
         return (
             <ClickOutside domRef={this.ref} ignoreRefs={ignoreClickEvents}
@@ -77,7 +78,7 @@ export default class DynamicContextMenu extends Component {
     }
 
     render() {
-        const {children, ignoreClickEvents} = this.props;
+        const {children} = this.props;
 
         return (
             <Fragment>
@@ -93,7 +94,13 @@ DynamicContextMenu.defaultProps = {
 };
 
 DynamicContextMenu.propTypes = {
-    menuItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+    menuItems: PropTypes.arrayOf(
+        PropTypes.shape({
+            label: PropTypes.string.isRequired,
+            onClick: PropTypes.func.isRequired,
+            className: PropTypes.string,
+        })
+    ).isRequired,
     ignoreClickEvents: PropTypes.arrayOf(PropTypes.object),
     data: PropTypes.any.isRequired
 };
