@@ -16,6 +16,7 @@ export default class DynamicContextMenu extends Component {
   }
 
   handleClick(item, event) {
+    event.stopPropagation();
     const {
       data
     } = this.props;
@@ -23,7 +24,6 @@ export default class DynamicContextMenu extends Component {
       showing: false
     });
     item.onClick(data, event);
-    event.stopPropagation();
   }
 
   handleClickOutside() {
@@ -34,6 +34,7 @@ export default class DynamicContextMenu extends Component {
 
   handleContextMenu(event) {
     event.preventDefault();
+    event.stopPropagation();
     const clickLocation = {
       x: event.clientX,
       y: event.clientY
