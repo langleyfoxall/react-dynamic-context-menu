@@ -59,4 +59,4 @@ As you can see menu items can have 3 properties. They are:
 | --- | --- |
 | Label | The text are appears on the menu item |
 | onClick | The callback that is called when the menu item is clicked. The first argument of the method is the data passed in to the `data` on the `DynamicContextMenu`. |
-| className (optional) | `String` | The class name of the menu item `div`. |
+| className (optional)| The class name of the menu item `div`. |
