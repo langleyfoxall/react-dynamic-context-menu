@@ -29,6 +29,7 @@
   "devDependencies": {
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0"
   },
   "peerDependencies": {
@@ -37,7 +38,7 @@
     "prop-types": "^15.6.2"
   },
   "dependencies": {
-    "@langleyfoxall/react-click-outside": "^1.0.0",
+    "@langleyfoxall/react-click-outside": "git+https://github.com/langleyfoxall/react-click-outside.git",
     "react-dom": "^16.6.3"
   }
 }
