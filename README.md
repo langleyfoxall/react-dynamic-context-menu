@@ -12,7 +12,7 @@ React Dynamic Context menu provides an easy way to add right click functionality
 ## Basic usage
 To use the `DynamicContextMenu` wrap the element you want to be clickable.
 
-```
+```jsx
 const menu = [
 	{
 		label: 'Save'
@@ -40,7 +40,7 @@ Whatever is passed into as the `data` prop will be used as the first argument wh
 
 
 ### Menu Items
-```
+```js
 [
 	{
 		label: 'Save'
