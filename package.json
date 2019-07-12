@@ -1,6 +1,6 @@
 {
   "name": "@langleyfoxall/react-dynamic-context-menu",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A component that can be used to add right click functionality to components",
   "main": "dist/DynamicContextMenu.js",
   "scripts": {
@@ -27,9 +27,9 @@
   },
   "homepage": "https://github.com/langleyfoxall/react-dynamic-context-menu#readme",
   "devDependencies": {
-    "@babel/cli": "^7.1.0",
-    "@babel/core": "^7.1.0",
-    "@babel/preset-env": "^7.2.3",
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.4",
     "@babel/preset-react": "^7.0.0"
   },
   "peerDependencies": {
@@ -39,6 +39,6 @@
   },
   "dependencies": {
     "@langleyfoxall/react-click-outside": "git+https://github.com/langleyfoxall/react-click-outside.git",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.8.6"
   }
 }

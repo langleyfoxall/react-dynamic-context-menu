@@ -39,27 +39,33 @@ export default class DynamicContextMenu extends Component {
         event.preventDefault();
         event.stopPropagation();
 
-        const clickLocation = {x: event.clientX, y: event.clientY};
+        const clickLocation = { x: event.clientX, y: event.clientY };
 
         // We need to render the menu with all of it's contents in order to calculate the size
         // without displaying it to the user. We can then decide which side of the cursor it should be on
-        this.setState({style: {opacity: 0}, showing: true}, () => {
-            const width = this.ref.current.getBoundingClientRect().width;
+        this.setState(
+            { style: { opacity: 0 }, showing: true },
+            () => {
+                const { onContextMenu } = this.props;
 
-            const screenW = window.innerWidth;
+                const width = this.ref.current.getBoundingClientRect().width;
+                const screenW = window.innerWidth;
+                const style = { opacity: 1 };
 
-            const style = {opacity: 1};
+                if (screenW - clickLocation.x > width) {
+                    style.left = `${clickLocation.x + 5}px`;
+                } else {
+                    style.left = `${clickLocation.x - width - 5}px`;
+                }
 
-            if (screenW - clickLocation.x > width) {
-                style.left = `${clickLocation.x + 5}px`;
-            } else {
-                style.left = `${clickLocation.x - width - 5}px`;
+                style.top = `${clickLocation.y + 5}px`;
+
+                this.setState(
+                    { style },
+                    onContextMenu
+                );
             }
-
-            style.top = `${clickLocation.y + 5}px`;
-
-            this.setState({style});
-        });
+        );
     }
 
     renderDropdown() {
@@ -93,7 +99,8 @@ export default class DynamicContextMenu extends Component {
 }
 
 DynamicContextMenu.defaultProps = {
-    ignoreClickEvents: null
+    ignoreClickEvents: null,
+    onContextMenu: () => null,
 };
 
 DynamicContextMenu.propTypes = {
@@ -105,5 +112,6 @@ DynamicContextMenu.propTypes = {
         })
     ).isRequired,
     ignoreClickEvents: PropTypes.arrayOf(PropTypes.object),
-    data: PropTypes.any.isRequired
+    data: PropTypes.any.isRequired,
+    onContextMenu: PropTypes.func,
 };
