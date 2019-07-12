@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 require("core-js/modules/es7.symbol.async-iterator");
 
@@ -29,9 +29,9 @@ var _reactClickOutside = _interopRequireDefault(require("@langleyfoxall/react-cl
 
 require("./style.css");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -45,11 +45,11 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var DynamicContextMenu =
 /*#__PURE__*/
@@ -66,9 +66,9 @@ function (_Component) {
       style: null,
       showing: false
     };
-    _this.ref = _react.default.createRef();
-    _this.handleContextMenu = _this.handleContextMenu.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.handleClickOutside = _this.handleClickOutside.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.ref = _react["default"].createRef();
+    _this.handleContextMenu = _this.handleContextMenu.bind(_assertThisInitialized(_this));
+    _this.handleClickOutside = _this.handleClickOutside.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -108,6 +108,8 @@ function (_Component) {
         },
         showing: true
       }, function () {
+        var onContextMenu = _this2.props.onContextMenu;
+
         var width = _this2.ref.current.getBoundingClientRect().width;
 
         var screenW = window.innerWidth;
@@ -125,7 +127,7 @@ function (_Component) {
 
         _this2.setState({
           style: style
-        });
+        }, onContextMenu);
       });
     }
   }, {
@@ -136,15 +138,15 @@ function (_Component) {
       var _this$props = this.props,
           menuItems = _this$props.menuItems,
           ignoreClickEvents = _this$props.ignoreClickEvents;
-      return _react.default.createElement(_reactClickOutside.default, {
+      return _react["default"].createElement(_reactClickOutside["default"], {
         domRef: this.ref,
         ignoreRefs: ignoreClickEvents,
         onClickOutside: this.handleClickOutside
-      }, _react.default.createElement("div", {
+      }, _react["default"].createElement("div", {
         className: "react-context-menu",
         style: this.state.style
-      }, _react.default.createElement("ul", null, menuItems.map(function (item, i) {
-        return _react.default.createElement("li", {
+      }, _react["default"].createElement("ul", null, menuItems.map(function (item, i) {
+        return _react["default"].createElement("li", {
           key: i,
           onClick: _this3.handleClick.bind(_this3, item),
           className: "item-hoverable ".concat(item.className || 0)
@@ -155,25 +157,29 @@ function (_Component) {
     key: "render",
     value: function render() {
       var children = this.props.children;
-      return _react.default.createElement(_react.Fragment, null, _react.default.cloneElement(children, {
+      return _react["default"].createElement(_react.Fragment, null, _react["default"].cloneElement(children, {
         onContextMenu: this.handleContextMenu
-      }), this.state.showing && _reactDom.default.createPortal(this.renderDropdown(), document.body));
+      }), this.state.showing && _reactDom["default"].createPortal(this.renderDropdown(), document.body));
     }
   }]);
 
   return DynamicContextMenu;
 }(_react.Component);
 
-exports.default = DynamicContextMenu;
+exports["default"] = DynamicContextMenu;
 DynamicContextMenu.defaultProps = {
-  ignoreClickEvents: null
+  ignoreClickEvents: null,
+  onContextMenu: function onContextMenu() {
+    return null;
+  }
 };
 DynamicContextMenu.propTypes = {
-  menuItems: _propTypes.default.arrayOf(_propTypes.default.shape({
-    label: _propTypes.default.string.isRequired,
-    onClick: _propTypes.default.func.isRequired,
-    className: _propTypes.default.string
+  menuItems: _propTypes["default"].arrayOf(_propTypes["default"].shape({
+    label: _propTypes["default"].string.isRequired,
+    onClick: _propTypes["default"].func.isRequired,
+    className: _propTypes["default"].string
   })).isRequired,
-  ignoreClickEvents: _propTypes.default.arrayOf(_propTypes.default.object),
-  data: _propTypes.default.any.isRequired
+  ignoreClickEvents: _propTypes["default"].arrayOf(_propTypes["default"].object),
+  data: _propTypes["default"].any.isRequired,
+  onContextMenu: _propTypes["default"].func
 };
