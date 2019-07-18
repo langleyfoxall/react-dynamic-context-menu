@@ -109,13 +109,16 @@ function (_Component) {
         showing: true
       }, function () {
         var onContextMenu = _this2.props.onContextMenu;
-
-        var width = _this2.ref.current.getBoundingClientRect().width;
-
-        var screenW = window.innerWidth;
+        var _window = window,
+            screenW = _window.innerWidth,
+            screenH = _window.innerHeight;
         var style = {
           opacity: 1
         };
+
+        var _this2$ref$current$ge = _this2.ref.current.getBoundingClientRect(),
+            width = _this2$ref$current$ge.width,
+            height = _this2$ref$current$ge.height;
 
         if (screenW - clickLocation.x > width) {
           style.left = "".concat(clickLocation.x + 5, "px");
@@ -123,7 +126,11 @@ function (_Component) {
           style.left = "".concat(clickLocation.x - width - 5, "px");
         }
 
-        style.top = "".concat(clickLocation.y + 5, "px");
+        if (screenH - clickLocation.y > height) {
+          style.top = "".concat(clickLocation.y + 5, "px");
+        } else {
+          style.top = "".concat(clickLocation.y - height - 5, "px");
+        }
 
         _this2.setState({
           style: style

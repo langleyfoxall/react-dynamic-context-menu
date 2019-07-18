@@ -47,10 +47,10 @@ export default class DynamicContextMenu extends Component {
             { style: { opacity: 0 }, showing: true },
             () => {
                 const { onContextMenu } = this.props;
-
-                const width = this.ref.current.getBoundingClientRect().width;
-                const screenW = window.innerWidth;
+                const { innerWidth: screenW, innerHeight: screenH } = window;
                 const style = { opacity: 1 };
+
+                const { width, height } = this.ref.current.getBoundingClientRect();
 
                 if (screenW - clickLocation.x > width) {
                     style.left = `${clickLocation.x + 5}px`;
@@ -58,7 +58,11 @@ export default class DynamicContextMenu extends Component {
                     style.left = `${clickLocation.x - width - 5}px`;
                 }
 
-                style.top = `${clickLocation.y + 5}px`;
+                if (screenH - clickLocation.y > height) {
+                    style.top = `${clickLocation.y + 5}px`;
+                } else {
+                    style.top = `${clickLocation.y - height - 5}px`;
+                }
 
                 this.setState(
                     { style },
